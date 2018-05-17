@@ -5,12 +5,17 @@
       <div class="second">2222</div>
       <div class="third">3333</div>
     </div>
-    <mt-field label="邮箱" state="success" v-model="email"></mt-field>
     <mt-datetime-picker
+      v-model="pickerVisible"
+      type="date"
       ref="picker"
-      v-model="pickerValue"
-      type="date">
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      @confirm="handleConfirm">
     </mt-datetime-picker>
+
+    <mt-field label="邮箱" state="success" v-model="email"></mt-field>
   </div>
 </template>
 
@@ -18,18 +23,20 @@
 export default {
   data () {
     return {
-      pickerValue: new Date(),
+      pickerVisible: new Date(),
       email: '333333'
     }
   },
   methods: {
     open () {
       this.$refs['picker'].open()
+    },
+    handleConfirm (val) {
+      this.email = val
     }
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .hello {

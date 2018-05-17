@@ -5,9 +5,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'assets/common.scss'
-import { Field, DatetimePicker } from 'qfpay-ui'
-Vue.component(DatetimePicker.name, DatetimePicker)
+import { Field, DatetimePicker } from 'mint-ui'
 Vue.component(Field.name, Field)
+Vue.component(DatetimePicker.name, DatetimePicker)
 
 Vue.config.productionTip = false
 
