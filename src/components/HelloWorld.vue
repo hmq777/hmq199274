@@ -27,6 +27,14 @@ export default {
       email: '333333'
     }
   },
+  watch: {
+    form: {
+      handler (newValue, oldValue) {
+        console.log(newValue, 6666)
+      }
+    }
+  },
+
   methods: {
     open () {
       this.$refs['picker'].open()
