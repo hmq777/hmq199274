@@ -6,7 +6,7 @@
       <div class="third">3333</div>
     </div>
     <mt-datetime-picker
-      v-model="pickerVisible"
+      v-model="form.pickerVisible"
       type="date"
       ref="picker"
       year-format="{value} 年"
@@ -15,7 +15,7 @@
       @confirm="handleConfirm">
     </mt-datetime-picker>
 
-    <mt-field label="邮箱" state="success" v-model="email"></mt-field>
+    <mt-field label="邮箱" state="success" v-model="form.email"></mt-field>
   </div>
 </template>
 
@@ -23,24 +23,51 @@
 export default {
   data () {
     return {
-      pickerVisible: new Date(),
-      email: '333333'
-    }
-  },
-  watch: {
-    form: {
-      handler (newValue, oldValue) {
-        console.log(newValue, 6666)
+      name: 'guoxin',
+      form: {
+        pickerVisible: new Date(),
+        email: '333333'
       }
     }
   },
+  watch: {
+    name: (val, old) => {
+      console.log(val, old, 111)
+    },
+    'form.email': (val, old) => {
+      console.log(val, old, 6666)
+    },
+    form: {
+      handler (val, old) {
+        console.log(val, old, 888)
+      },
+      immediate: true, // 初始化时就执行
+      deep: true // 深度监听，对象和数组内容
+    }
+  },
 
+  mounted () {
+    console.log(555)
+    this.scopeClose()()
+  },
   methods: {
     open () {
+      this.scopeClose()()
+      this.form = Object.assign({}, this.form, {
+        name: 'guoxin'
+      })
       this.$refs['picker'].open()
     },
     handleConfirm (val) {
-      this.email = val
+      this.form.email = val
+    },
+    scopeClose () {
+      var a = 100
+      a++
+      function f () {
+        console.log(a)``
+      }
+      return f
     }
   }
 }
