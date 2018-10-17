@@ -48,7 +48,6 @@ export default {
 
   mounted () {
     console.log(555)
-    this.scopeClose()()
   },
   methods: {
     open () {
@@ -60,14 +59,6 @@ export default {
     },
     handleConfirm (val) {
       this.form.email = val
-    },
-    scopeClose () {
-      var a = 100
-      a++
-      function f () {
-        console.log(a)``
-      }
-      return f
     }
   }
 }
