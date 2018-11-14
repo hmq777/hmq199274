@@ -6,7 +6,7 @@
       <div class="third">3333</div>
     </div>
     <mt-datetime-picker
-      v-model="form.pickerVisible"
+      v-model="pickerVisible"
       type="date"
       ref="picker"
       year-format="{value} 年"
@@ -14,51 +14,47 @@
       date-format="{value} 日"
       @confirm="handleConfirm">
     </mt-datetime-picker>
-
-    <mt-field label="邮箱" state="success" v-model="form.email"></mt-field>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      name: 'guoxin',
-      form: {
-        pickerVisible: new Date(),
-        email: '333333'
-      }
+      pickerVisible: new Date(),
+      name: 'children2'
     }
   },
-  watch: {
-    name: (val, old) => {
-      console.log(val, old, 111)
-    },
-    'form.email': (val, old) => {
-      console.log(val, old, 6666)
-    },
-    form: {
-      handler (val, old) {
-        console.log(val, old, 888)
-      },
-      immediate: true, // 初始化时就执行
-      deep: true // 深度监听，对象和数组内容
-    }
+  beforeCreate() {
+    console.log(`--${this.name}--beforeCreate`);
   },
-
-  mounted () {
-    console.log(555)
+  created() {
+    console.log(`--${this.name}--created`)
+  },
+  beforeMount() {
+    console.log(`--${this.name}--beforeMount`)
+  },
+  mounted() {
+    console.log(`--${this.name}--mounted`)
+  },
+  beforeUpdate() {
+    console.log(`--${this.name}--beforeUpdate`)
+  },
+  updated() {
+    console.log(`--${this.name}--updated`)
+  },
+  beforeDestroy() {
+    console.log(`--${this.name}--beforeDestroy`)
+  },
+  destroyed() {
+    console.log(`--${this.name}--destroyed`)
   },
   methods: {
     open () {
-      this.scopeClose()()
-      this.form = Object.assign({}, this.form, {
-        name: 'guoxin'
-      })
       this.$refs['picker'].open()
     },
     handleConfirm (val) {
-      this.form.email = val
+      console.log(2222)
     }
   }
 }
@@ -67,6 +63,7 @@ export default {
 <style scoped lang="scss">
 .hello {
   display: flex;
+  justify-content: space-between;
   font-size: 40px;
   div {
     flex: 1;

@@ -1,6 +1,6 @@
 # local-h5
 
-> vue project
+> vue project mint-ui vue2.0 webpack3.0+
 
 ## Build Setup
 

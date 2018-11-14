@@ -5,9 +5,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'assets/common.scss'
-import { Field, DatetimePicker } from 'mint-ui'
+import { Field, DatetimePicker, Button } from 'mint-ui'
 Vue.component(Field.name, Field)
 Vue.component(DatetimePicker.name, DatetimePicker)
+Vue.component(Button.name, Button)
 
 Vue.config.productionTip = false
 
