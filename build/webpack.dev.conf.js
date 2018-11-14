@@ -1,4 +1,6 @@
 'use strict'
+require('./check-versions')()
+
 const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
