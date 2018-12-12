@@ -68,6 +68,29 @@
         ]
       }
     },
+    created() {
+      // 作用域
+      /* var name = "1111";
+      function t() {
+        console.log(name, 111); // undefined 111
+        var name = "2222";
+        function s() {
+          var name = "3333";
+          console.log(name, 666); // 3333 666
+        }
+        console.log(name, 222); // 2222 222
+        function ss() {
+          name = "4444";
+          console.log(name, 888); // 4444 888
+        }
+        console.log(name, 333); // 2222 333
+        s();
+        console.log(name, 444); // 2222 444
+        ss();
+        console.log(name, 555); // 4444 555
+      }
+      t(); */
+    },
     methods: {
       // 更改数据
       change: function (index) {

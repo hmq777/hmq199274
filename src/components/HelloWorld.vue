@@ -51,9 +51,8 @@ export default {
   },
   methods: {
     open () {
-      this.scopeClose()()
       this.form = Object.assign({}, this.form, {
-        name: 'guoxin'
+        email: 'guoxin'
       })
       this.$refs['picker'].open()
     },

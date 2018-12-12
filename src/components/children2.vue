@@ -25,8 +25,9 @@ export default {
       name: 'children2'
     }
   },
+
   beforeCreate() {
-    console.log(`--${this.name}--beforeCreate`);
+    console.log(`--${this.name || 'children2'}--beforeCreate`);
   },
   created() {
     console.log(`--${this.name}--created`)
@@ -35,6 +36,7 @@ export default {
     console.log(`--${this.name}--beforeMount`)
   },
   mounted() {
+    // console.log(this, 8888383838)
     console.log(`--${this.name}--mounted`)
   },
   beforeUpdate() {

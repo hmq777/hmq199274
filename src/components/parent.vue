@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button @click="goHello">HELLO WORLD</button>
-    <children1 :email="value" @changeValue="changeValue"></children1>
+    <button @click="goHello">{{ value }}</button>
+    <children1 va="guoxin" :email="value" @changeValue="changeValue" class="a" id="ddddd"></children1>
     <children2></children2>
   </div>
 </template>
@@ -13,7 +13,7 @@
   export default {
   data() {
     return {
-      value: '',
+      value: 'Hello',
       name: 'parent'
     }
   },
@@ -24,7 +24,7 @@
   },
 
   beforeCreate() {
-    console.log(`--${this.name}--beforeCreate`);
+    console.log(`--${this.name || 'parent'}--beforeCreate`);
   },
   created() {
     this.changeValue('111');
@@ -60,7 +60,7 @@
       this.$router.push({name: 'HelloWorld'});
     },
     changeValue(val) {
-      console.log(val, 88888)
+      // console.log(val, 88888)
       this.value = val;
     }
   }

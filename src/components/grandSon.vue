@@ -1,25 +1,35 @@
 <template>
   <div>
-    <mt-button @click="changeValue($event)" type="primary">children1</mt-button>
-    <grandSon v-bind="$props"></grandSon>
+    <div class="hello">
+      <div class="first" @click="open">1111</div>
+      <div class="second">{{ email }}</div>
+      <div class="third">3333</div>
+    </div>
+    <mt-datetime-picker
+      v-model="pickerVisible"
+      type="date"
+      ref="picker"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      @confirm="handleConfirm">
+    </mt-datetime-picker>
   </div>
 </template>
 
 <script>
-  import grandSon from './grandSon';
-  export default {
+export default {
   data() {
     return {
-      name: 'children1'
+      pickerVisible: new Date(),
+      name: 'grandSon'
     }
   },
-    props: ['va', 'email', 'id'],
-    components: {
-      grandSon
-    },
+
+  props: ['va', 'email'],
 
   beforeCreate() {
-    console.log(`--${this.name || 'children1'}--beforeCreate`);
+    console.log(`--${this.name || 'grandSon'}--beforeCreate`);
   },
   created() {
     console.log(`--${this.name}--created`)
@@ -28,7 +38,6 @@
     console.log(`--${this.name}--beforeMount`)
   },
   mounted() {
-    // console.log(this, 99999999999999)
     console.log(`--${this.name}--mounted`)
   },
   beforeUpdate() {
@@ -44,10 +53,11 @@
     console.log(`--${this.name}--destroyed`)
   },
   methods: {
-    changeValue(e) {
-      // console.log(22222, e);
-      // 改变父组件的值
-      this.$emit('changeValue', 'guoxin')
+    open () {
+      this.$refs['picker'].open()
+    },
+    handleConfirm (val) {
+      console.log(2222)
     }
   }
 }
