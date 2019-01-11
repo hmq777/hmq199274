@@ -13,11 +13,19 @@ export default {
   },
 
   created() {
-    let a = [1, 4, 2, 3, 2, 5, 0, 8, 6, 7];
+    let a = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 38, 4, 19, 50, 48];
+    // let a = [1, 3, 5, 6, 7, 8, 10, 15, 24];
 
-    console.time('suanfa');
-    this.compareSort(a);
-    console.timeEnd('suanfa');
+    // this.countSort(a);
+    // this.bubbleSort3(a);
+    this.selectSort(a);
+    // this.insertionSort(a);
+    console.log(a, 9999)
+    // console.time('suanfa');
+    // this.compareSort(a);
+    // let result = this.halfSearch(a, 15);
+    // console.log(result, 666)
+    // console.timeEnd('suanfa');
   },
 
   mounted() {
@@ -42,6 +50,7 @@ export default {
 
     // 计数排序
     countSort(a) {
+      console.time('计数排序');
       let [max, min, len0] = [a[0], a[0], a.length];
       for(let i = 1; i < len0; i++) {
         if(a[i] > max) {
@@ -51,18 +60,13 @@ export default {
           min = a[i];
         }
       }
-      console.log(max, min, 666);
 
       let len = max - min + 1;
-      console.log(len, 222)
       let arr = new Array(len);
-      console.log(arr, 44444)
 
       for(let j = 0; j < len0; j++) {
-        console.log(arr[a[j]], 555)
         arr[a[j]] = arr[a[j]] ? arr[a[j]] + 1 : 1;
       }
-      console.log(arr, 777)
       let newArr = [];
 
       for(let k = 0; k < arr.length; k++) {
@@ -70,12 +74,12 @@ export default {
           newArr.push(k);
         }
       }
-
+      console.timeEnd('计数排序');
       console.log(newArr, 888)
     },
 
     // 冒泡排序,从小到大
-    buddleSort(a) {
+    bubbleSort(a) {
       let [i, j, len, tmp] = [0, 0, a.length];
       for(i = 0; i < len - 1; i++) {
         for(j = 0; j < len - i - 1; j++) {
@@ -88,22 +92,140 @@ export default {
         }
       }
       console.log(a, 888)
+      return a;
     },
 
-    // 比较排序
-    compareSort(a) {
-      let [i, j, len, tmp] = [0, 0, a.length];
-      for(i = 0; i < len - 1; i++) {
-        for(j = len - 1; j > i; j-- ) {
-          console.log(2222)
-          if(a[j] > a[j - 1]) {
-            tmp = a[j];
-            a[j] = a[j - 1];
-            a[j - 1] = tmp;
+    // 冒泡改进1，记录每次最后交互的位置
+    bubbleSort1(arr) {
+      console.time('改进后冒泡排序耗时');
+      let i = arr.length - 1; // 初始时,最后位置保持不变
+      while (i > 0) {
+        let pos = 0; // 每趟开始时,无记录交换
+        for (let j = 0; j < i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            pos = j; // 记录交换的位置，如果没有交换项，说明是有序的为0
+            let tmp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = tmp;
           }
         }
+        i = pos; // 为下一趟排序作准备
       }
-      console.log(a, 666)
+      console.timeEnd('改进后冒泡排序耗时');
+      return arr;
+    },
+
+    // 冒泡改进2，一次找出最大最小值，减少循环
+    bubbleSort2(arr) {
+      console.time('2.改进后冒泡排序耗时');
+      let [low, high, tmp, j] = [0, arr.length - 1]; // 设置变量的初始值
+      while (low < high) {
+        for (j = low; j < high; j++) { // 正向冒泡,找到最大者
+          if (arr[j] > arr[j + 1]) {
+            tmp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = tmp;
+          }
+        }
+        high--; // 修改high值, 前移一位
+        for (j = high; j > low; j--) { // 反向冒泡,找到最小者
+          if (arr[j] < arr[j - 1]) {
+            tmp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = tmp;
+          }
+        }
+        low++; // 修改low值,后移一位
+      }
+      console.timeEnd('2.改进后冒泡排序耗时');
+      return arr;
+    },
+
+    // 冒泡改进3，1,2的结合，减少循环次数，最终方案
+    bubbleSort3(arr) {
+      console.time('3.改进后冒泡排序耗时');
+      let low = 0;
+      let high = arr.length - 1; // 设置变量的初始值
+      let tmp, j;
+      while (low < high) {
+        let ps = 0; // 设置一个过渡变量，记录每次调换的位置
+        for (j = low; j < high; j++) { // 正向冒泡,找到最大者
+          if (arr[j] > arr[j + 1]) {
+            tmp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = tmp;
+            ps = j; // 记录正向冒泡换位的位置，没有换位的情况下为初始值0
+          }
+        }
+        high = ps; // 修改high值, 正向冒泡换位的位置
+        for (j = high; j > low; j--) { // 反向冒泡,找到最小者
+          if (arr[j] < arr[j - 1]) {
+            tmp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = tmp;
+            ps = j; // 记录反向冒泡换位的位置，没有换位的情况下为初始值0
+          }
+        }
+        low = ps; // 修改low值,反向冒泡换位的位置
+      }
+      console.timeEnd('3.改进后冒泡排序耗时');
+      return arr;
+    },
+
+    // 选择排序，可以直接改变原数组，也可以创建一个新数组
+    selectSort(arr) {
+      let len = arr.length;
+      let minIndex, temp;
+      console.time('选择排序耗时');
+      for (let i = 0; i < len - 1; i++) {
+        minIndex = i;
+        for (let j = i + 1; j < len; j++) {
+          if (arr[j] < arr[minIndex]) { // 寻找最小的数
+            minIndex = j; // 将最小数的索引保存
+          }
+        }
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+      }
+      console.timeEnd('选择排序耗时');
+      return arr;
+    },
+
+    // 插入排序
+    insertionSort(array) {
+      if (Object.prototype.toString.call(array) === '[object Array]') {
+        console.time('插入排序耗时');
+        for (let i = 1; i < array.length; i++) {
+          let key = array[i];
+          let j = i - 1;
+          while (j >= 0 && array[j] > key) {
+            array[j + 1] = array[j];
+            j--;
+          }
+          array[j + 1] = key;
+        }
+        console.timeEnd('插入排序耗时');
+        return array;
+      } else {
+        return 'array is not an Array!';
+      }
+    },
+
+    // 二分查找
+    halfSearch(a, val, star = 0, end = a.length) {
+      if(star > end) {
+        return -1;
+      }
+      let index = Math.floor((star + end) / 2);
+      if(a[index] === val) {
+        return index;
+      }else if(a[index] > val) {
+        return this.halfSearch(a, val, star, index - 1);
+      }else {
+        return this.halfSearch(a, val, index + 1, end);
+      }
+
     }
   }
 }

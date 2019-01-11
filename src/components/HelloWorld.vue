@@ -47,7 +47,10 @@ export default {
   },
 
   mounted () {
-    console.log(555)
+    const a = {'name': 'guoxin'};
+    a.name = 'hanmegnqi';
+    a.value = '6666';
+    console.log(a, 555)
   },
   methods: {
     open () {

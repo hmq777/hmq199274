@@ -1,6 +1,7 @@
 <template>
   <div>
     <mt-button @click="changeValue($event)" type="primary">children1</mt-button>
+    <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
     <grandSon v-bind="$props"></grandSon>
   </div>
 </template>
@@ -13,11 +14,22 @@
       name: 'children1'
     }
   },
-    props: ['va', 'email', 'id'],
-    components: {
-      grandSon
-    },
+  props: ['va', 'email', 'id'],
+  components: {
+    grandSon
+  },
 
+  watch: {
+    'username': function (val) {
+      this.$emit('changeValue', val);
+    }
+  },
+  computed: {
+    username() {
+      return this.email;
+
+    }
+  },
   beforeCreate() {
     console.log(`--${this.name || 'children1'}--beforeCreate`);
   },

@@ -8,6 +8,7 @@ import suanfa from '@/components/suanfa'
 import extend from '@/components/extend'
 import sass from '@/components/sass'
 import clone from '@/components/clone'
+import promise from '@/components/promise'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/clone',
       name: 'clone',
       component: clone
+    },
+    {
+      path: '/promise',
+      name: 'promise',
+      component: promise
     }
   ]
 })

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="goHello">{{ value }}</button>
+    <mt-button @click="goHello" type="primary">{{ value }}</mt-button>
     <children1 va="guoxin" :email="value" @changeValue="changeValue" class="a" id="ddddd"></children1>
     <children2></children2>
   </div>
@@ -38,7 +38,7 @@
     this.$el.addEventListener('click', () => {
       console.log('click' + 66666)
     })
-    this.changeValue();
+    this.changeValue('333333');
     // this.value = 'ggggg';
     console.log(`--${this.name}--mounted`)
   },
