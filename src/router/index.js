@@ -3,12 +3,14 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import table from '@/components/table'
 import parent from '@/components/parent'
-import flex from '@/components/flex'
+import array from '@/components/array'
+import model from '@/components/model'
 import suanfa from '@/components/suanfa'
 import extend from '@/components/extend'
 import sass from '@/components/sass'
 import clone from '@/components/clone'
 import promise from '@/components/promise'
+import vue from '@/components/vue'
 
 Vue.use(Router)
 
@@ -40,9 +42,14 @@ export default new Router({
       component: extend
     },
     {
-      path: '/flex',
-      name: 'flex',
-      component: flex
+      path: '/array',
+      name: 'array',
+      component: array
+    },
+    {
+      path: '/model',
+      name: 'model',
+      component: model
     },
     {
       path: '/sass',
@@ -58,6 +65,11 @@ export default new Router({
       path: '/promise',
       name: 'promise',
       component: promise
+    },
+    {
+      path: '/vue',
+      name: 'vue',
+      component: vue
     }
   ]
 })

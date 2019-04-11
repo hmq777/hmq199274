@@ -50,7 +50,7 @@ export default {
     const a = {'name': 'guoxin'};
     a.name = 'hanmegnqi';
     a.value = '6666';
-    console.log(a, 555)
+    console.log(a, 555);
   },
   methods: {
     open () {
@@ -72,6 +72,9 @@ export default {
   font-size: 40px;
   div {
     flex: 1;
+  }
+  .second {
+    border-bottom: 2px solid red;
   }
 }
 </style>
