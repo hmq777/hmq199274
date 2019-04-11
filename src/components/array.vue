@@ -54,6 +54,10 @@ export default {
 
   mounted() {
     this.obDelete();
+
+    // 数组合并
+    let arr = Array.prototype.concat.apply([], [1, [2, 3], [4]]);
+    console.log(arr, 6666)
     // console.log(this);
   },
 
@@ -66,7 +70,7 @@ export default {
       };
       let b = delete a['value'];
       console.log(a, 11, b);
-      // {value: 666} 11 true
+      // {name: 'guoxin'} 11 true
     }
   }
 }
